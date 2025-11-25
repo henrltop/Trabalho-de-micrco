@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Monitor de Status</title>
+    <meta http-equiv="refresh" content="3">
+    <style>
+        body { font-family: sans-serif; text-align: center; background: #222; color: #fff; padding-top: 50px; }
+        .card { background: #333; display: inline-block; padding: 30px; border-radius: 10px; min-width: 300px; }
+        
+        /* Estilo da Luz de Status */
+        .status-badge {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 20px;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+        .green { background-color: #28a745; box-shadow: 0 0 15px #28a745; }
+        .red { background-color: #dc3545; box-shadow: 0 0 15px #dc3545; }
+        
+        .info { color: #aaa; margin-top: 10px; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>Status do Sistema</h1>
+
+        {% if online %}
+            <div class="status-badge green">ESP32 CONECTADO</div>
+        {% else %}
+            <div class="status-badge red">ESP32 DESCONECTADO</div>
+        {% endif %}
+
+        <hr style="border-color: #444;">
+
+        {% if leitura %}
+            <p class="info">Último sinal recebido em:</p>
+            <p>{{ leitura.data_hora|date:"H:i:s" }}</p>
+        {% else %}
+            <p class="info">Nenhum dado recebido ainda.</p>
+        {% endif %}
+    </div>
+
+</body>
+</html>
